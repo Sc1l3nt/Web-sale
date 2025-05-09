@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Thanh toán</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Trang chủ</a> |
+            <a href="{{ url_for('view_cart') }}">Giỏ hàng</a>
+        </nav>
+    </header>
+    <main>
+        <section class="checkout">
+            {% if total_price > 0 %}
+            <p>Tổng tiền thanh toán: {{ total_price }} VNĐ</p>
+            <form action="{{ url_for('process_order') }}" method="post">
+                <button type="submit">Xác nhận thanh toán</button>
+            </form>
+            {% else %}
+            <p>Giỏ hàng của bạn đang trống!</p>
+            {% endif %}
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Cửa hàng của tôi</p>
+    </footer>
+</body>
+</html>

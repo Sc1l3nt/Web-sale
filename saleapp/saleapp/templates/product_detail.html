@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>{{ product.name }}</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Trang chủ</a> |
+            <a href="{{ url_for('view_cart') }}">Giỏ hàng</a>
+        </nav>
+    </header>
+    <main>
+        <section class="product-detail">
+            <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">
+            <p>{{ product.description }}</p>
+            <p>Giá: {{ product.price }} VNĐ</p>
+            <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
+                <label for="quantity">Số lượng:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+                <button type="submit">Thêm vào giỏ hàng</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Cửa hàng của tôi</p>
+    </footer>
+</body>
+</html>
