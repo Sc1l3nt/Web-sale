@@ -7,6 +7,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <style>
+        .checkout {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .checkout form {
+            margin-top: 20px;
+        }
+        .checkout form button {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .checkout form button:hover {
+            background-color: #222;
+        }
+    </style>
+
     <header>
         <h1>Thanh toán</h1>
         <nav>
