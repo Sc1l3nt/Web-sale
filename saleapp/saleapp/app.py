@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import json
 import os
+import io
+import sys
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 app = Flask(__name__)
 
@@ -119,7 +122,12 @@ def process_order():
         print(f"- {item['product']['name']}: {item['quantity']} x {item['product']['price']} = {item['quantity'] * item['product']['price']}")
     print(f"Tổng tiền: {sum(item['product']['price'] * item['quantity'] for item in cart.values())}")
     cart.clear()
-    return "Cảm ơn bạn đã mua hàng!"
+    return  redirect(url_for('payment_success'))
+
+@app.route('/payment_success')
+def payment_success():
+    return render_template('payment_success.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)

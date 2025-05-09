@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thanh toán thành công</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+    .success {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #e6ffe6;
+        border: 1px solid #33cc33;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .success h2 {
+        color: #2e7d32;
+    }
+    .success a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #2e7d32;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .success a:hover {
+        background-color: #27662a;
+    }
+    .success {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #e6ffe6;
+        border: 1px solid #33cc33;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .success h2 {
+        color: #2e7d32;
+    }
+    .success a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #2e7d32;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .success a:hover {
+        background-color: #27662a;
+    }
+</style>
+<body>
+    <div class="success">
+        <h2>🎉 Thanh toán thành công!</h2>
+        <p>Cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi.</p>
+        <a href="{{ url_for('index') }}">Quay về trang chủ</a>
+    </div>
+</body>
+</html>

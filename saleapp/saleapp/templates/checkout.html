@@ -8,6 +8,31 @@
 </head>
 <body>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        main {
+            flex: 1;
+        }
+        a {
+            color: rgb(207, 123, 20);
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        a:hover {
+            color: #ddd;
+        }
         .checkout {
             background-color: white;
             padding: 20px;
@@ -18,7 +43,7 @@
             margin-top: 20px;
         }
         .checkout form button {
-            background-color: #333;
+            background-color: #007bff;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -26,10 +51,15 @@
             cursor: pointer;
         }
         .checkout form button:hover {
-            background-color: #222;
+            background-color: rgb(207, 123, 20);
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
         }
     </style>
-
     <header>
         <h1>Thanh toán</h1>
         <nav>
