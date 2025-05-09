@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Giỏ hàng</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Trang chủ</a>
+        </nav>
+    </header>
+    <main>
+        <section class="cart">
+            {% if cart %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng cộng</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart.values() %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>
+                            <form action="{{ url_for('update_cart', product_id=item.product.id) }}" method="post">
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                                <button type="submit">Cập nhật</button>
+                            </form>
+                        </td>
+                        <td>{{ item.product.price }} VNĐ</td>
+                        <td>{{ item.product.price * item.quantity }} VNĐ</td>
+                        <td>
+                            <form action="{{ url_for('remove_from_cart', product_id=item.product.id) }}" method="post">
+                                <button type="submit">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Tổng tiền:</td>
+                        <td>{{ total_price }} VNĐ</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <a href="{{ url_for('checkout') }}" class="pay">Thanh toán</a>
+            {% else %}
+            <p>Giỏ hàng của bạn đang trống.</p>
+            {% endif %}
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Cửa hàng của tôi</p>
+    </footer>
+</body>
+</html>

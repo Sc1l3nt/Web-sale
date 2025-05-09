@@ -1,0 +1,128 @@
+/* CSS tùy chỉnh của bạn ở đây */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h2 {
+    text-align: center;
+}
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+header nav a:hover {
+    color: #ddd;
+}
+main {
+    flex: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+a {
+    text-decoration: none;
+    color: rgb(207, 123, 20);
+}
+
+.product-list ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+.product-list ul li {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.product-list ul li img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.product-list ul li h3 {
+    margin: 10px 0;
+}
+.product-list ul li p {
+    margin: 5px 0;
+}
+
+.product-detail {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+.product-detail img {
+    width: 300px;
+    height: auto;
+    border-radius: 5px;
+}
+.cart {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgb(29, 1, 12);
+}
+.cart table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.cart table th, .cart table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+.cart table th {
+    background-color: #f0f0f0;
+}
+.cart table tfoot td {
+    font-weight: bold;
+}
+.checkout {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.checkout form {
+    margin-top: 20px;
+}
+.checkout form button {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.checkout form button:hover {
+    background-color: #222;
+}
