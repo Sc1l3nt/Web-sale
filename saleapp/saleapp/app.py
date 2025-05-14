@@ -12,19 +12,56 @@ DATA_DIR = os.path.join(app.root_path, 'data')
 # Đảm bảo thư mục dữ liệu tồn tại
 os.makedirs(DATA_DIR, exist_ok=True)
 
+def load_json_data(filename):
+    filepath = os.path.join(DATA_DIR, filename)
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"Lỗi: File {filename} không tồn tại.")
+        return []
+    except json.JSONDecodeError:
+        print(f"Lỗi: File {filename} bị lỗi JSON.")
+        return []
+
 # Hàm để tải dữ liệu sản phẩm từ file JSON
-def load_products():
+def load_products(cate_id = None, kw = None, from_price = None, to_price = None):
     """Tải dữ liệu sản phẩm từ file JSON."""
     products_file = os.path.join(DATA_DIR, 'products.json')
     try:
         with open(products_file, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            products = json.load(f)
     except FileNotFoundError:
         return []  # Trả về danh sách rỗng nếu file không tồn tại
     except json.JSONDecodeError:
         print(f"Lỗi: File JSON sản phẩm bị hỏng.  Trả về mặc định.")
         return [] # hoặc xử lý khác
+    
+    if cate_id:
+        products = [p for p in products if p['category_id'] == int(cate_id)]
 
+    if kw:
+        products = [p for p in products if p['name'].lower().find(kw.lower()) >= 0]
+
+
+    if from_price:
+        try:
+            from_price = float(from_price)
+            products = [p for p in products if p['price'] >= from_price]
+        except ValueError:
+            pass  # Không lọc nếu không hợp lệ
+        
+    if to_price:
+        try:
+            to_price = float(to_price)
+            products = [p for p in products if p['price'] <= to_price]
+        except ValueError:
+            pass  # Không lọc nếu không hợp lệ
+
+    return products
+
+def load_categories():
+    return load_json_data('categories.json')
 # Hàm để lưu dữ liệu sản phẩm vào file JSON
 def save_products(products):
     """Lưu dữ liệu sản phẩm vào file JSON."""
@@ -41,14 +78,29 @@ if not products:
     print("Đã tạo file products.json mặc định.")
 # Giỏ hàng (lưu tạm trong session, cần thay bằng cơ sở dữ liệu cho ứng dụng thực tế)
 cart = {}
+categories = load_categories()
 
 @app.route('/')
 def index():
     json_path = os.path.join(app.root_path, 'data', 'products.json')
     with open(json_path, encoding='utf-8') as f:
         products = json.load(f)
-    return render_template('index.html', products=products)
+    return render_template('index.html', products=products, categories=categories)
 
+@app.route("/search")
+def search():
+    cate_id = request.args.get("category_id")
+
+    kw = request.args.get("keyword")
+    from_price = request.args.get("from_price")
+    to_price = request.args.get("to_price")
+    products = load_products(cate_id=cate_id,
+                                    kw = kw,
+                                    from_price= from_price,
+                                    to_price = to_price)
+    
+    return render_template('index.html',
+                            products=products)
 
 @app.route("/product/<int:product_id>")
 def product_detail(product_id):
@@ -128,6 +180,27 @@ def process_order():
 def payment_success():
     return render_template('payment_success.html')
 
+
+@app.route('/category/<int:cate_id>')
+def show_products_by_category(cate_id):
+    """Hiển thị sản phẩm theo ID danh mục."""
+    print(f"[DEBUG] cate_id nhận được: {cate_id}")
+    print(f"[DEBUG] Danh sách categories: {categories}")
+
+    # Lọc sản phẩm theo cate_id (ép kiểu để so sánh chắc chắn)
+    filtered_products = [
+        product for product in products 
+        if int(product.get('category_id', -1)) == cate_id
+    ]
+
+    # Tìm tên danh mục
+    category = next((cat for cat in categories if int(cat.get('id', -1)) == cate_id), None)
+    category_name = category['name'] if category else "Danh mục không tồn tại"
+
+    print(f"[DEBUG] Số sản phẩm lọc được: {len(filtered_products)}")
+    print(f"[DEBUG] Tên danh mục: {category_name}")
+
+    return render_template('index.html', products=filtered_products, categories=categories, current_category=category_name)
 
 if __name__ == "__main__":
     app.run(debug=True)

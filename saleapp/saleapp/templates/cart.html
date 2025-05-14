@@ -32,20 +32,36 @@
         font-weight: bold;
     }
     .pay {
-        color: rgb(207, 123, 20);
+        color: white;
         text-decoration: none;
         margin-left: 10px;
-        }
+    }
 
-        a:hover {
-            color: #ddd;
-        }
+    a:hover {
+        color: #B3AFB1;
+    }
+    .home {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .delete,.update,.pay {
+        padding: 5px 5px;
+        font-size: 14px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        outline: none;
+        transition: all 0.3s ease;
+        width: 100px;
+        background: linear-gradient( #f27121, #e94057,#8a2387);
+        color: white;
+        text-align: center;
+        cursor: pointer;
     }
     </style>
     <header>
         <h1>Giỏ hàng</h1>
         <nav>
-            <a href="{{ url_for('index') }}">Trang chủ</a>
+            <a href="{{ url_for('index') }}" class="home">Trang chủ</a>
         </nav>
     </header>
     <main>
@@ -68,14 +84,14 @@
                         <td>
                             <form action="{{ url_for('update_cart', product_id=item.product.id) }}" method="post">
                                 <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
-                                <button type="submit">Cập nhật</button>
+                                <button type="submit" class="update">Cập nhật</button>
                             </form>
                         </td>
                         <td>{{ item.product.price }} VNĐ</td>
                         <td>{{ item.product.price * item.quantity }} VNĐ</td>
                         <td>
                             <form action="{{ url_for('remove_from_cart', product_id=item.product.id) }}" method="post">
-                                <button type="submit">Xóa</button>
+                                <button type="submit" class="delete">Xóa</button>
                             </form>
                         </td>
                     </tr>

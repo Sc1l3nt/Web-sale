@@ -10,7 +10,7 @@
     <style>
         html, body {
             height: 100%;
-            margin: 0;
+            margin-top: 0;
         }
 
         body {
@@ -20,17 +20,38 @@
             font-family: sans-serif;
             background-color: #f9f9f9;
         }
-
+        header {
+            height: 120px;
+        }
         main {
             flex: 1;
-        }
-        a {
-            color: rgb(207, 123, 20);
+            margin-top: auto;
+        }        
+        nav a {
+            color:white;
             text-decoration: none;
             margin-left: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px 10px;
+            width: 20px;
+            background: linear-gradient( #f27121, #e94057,#8a2387);
+            text-align: center;
+            cursor: pointer;
         }
-
-        a:hover {
+        .submit {
+            color:white;
+            text-decoration: none;
+            margin-left: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px 10px;
+            width: 200px;
+            background: linear-gradient( #f27121, #e94057,#8a2387);
+            text-align: center;
+            cursor: pointer;
+        }
+        a,.submit:hover {
             color: #ddd;
         }
         .checkout {
@@ -43,7 +64,7 @@
             margin-top: 20px;
         }
         .checkout form button {
-            background-color: #007bff;
+            background: linear-gradient( #f27121, #e94057,#8a2387);
             color: white;
             padding: 10px 20px;
             border: none;
@@ -52,7 +73,7 @@
         }
         .checkout form button:hover {
             background-color: rgb(207, 123, 20);
-        }
+        } 
         footer {
             background-color: #333;
             color: white;
@@ -72,7 +93,7 @@
             {% if total_price > 0 %}
             <p>Tổng tiền thanh toán: {{ total_price }} VNĐ</p>
             <form action="{{ url_for('process_order') }}" method="post">
-                <button type="submit">Xác nhận thanh toán</button>
+                <button type="submit" class="submit">Xác nhận thanh toán</button>
             </form>
             {% else %}
             <p>Giỏ hàng của bạn đang trống!</p>

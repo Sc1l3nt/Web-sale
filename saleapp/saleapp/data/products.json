@@ -4,83 +4,113 @@
         "name": "iPhone 16 Pro Max",
         "price": 37000000,
         "description": "Apple, 512GB, RAM: 8GB, iOS18",
-        "image": "image/p1.jpg"},
+        "image": "image/p1.jpg",
+        "category_id": 1
+    },
     {
         "id": 2,
         "name": "iPad Pro M1",
         "price": 36000000,
         "description": "Apple, 256GB, RAM: 8GB, Wifi",
-        "image": "image/p2.jpg"},
+        "image": "image/p2.jpg",
+        "category_id": 3
+    },
     {
         "id": 3,
         "name": "Apple Watch series 10",
         "price": 15000000,
         "description": "Apple S10 chip, RAM: 64GB, WatchOS 11",
-        "image": "image/p3.jpg"},
+        "image": "image/p3.jpg",
+        "category_id": 5
+    },
     {
         "id": 4,
         "name": "Macbook Pro M4",
         "price": 39000000,
         "description": "Apple M4 chip, RAM: 12GB, SSD: 512GB",
-        "image": "image/p4.jpg"},
+        "image": "image/p4.jpg",
+        "category_id": 2
+    },
     {
         "id": 5,
         "name": "Lenovo LOQ 2024",
         "price": 18000000,
         "description": "Intel core i5-13450HX, Gefore RTX2050, RAM: 12GB, SSD: 512",
-        "image": "image/p5.jpg"},
+        "image": "image/p5.jpg",
+        "category_id": 2
+    },
     {
         "id": 6,
         "name": "Acer Nitro V",
         "price": 17000000,
         "description": "Intel core i5-13420H, Gefore RTX2050, RAM: 16GB, SSD: 512",
-        "image": "image/p6.jpg"},
+        "image": "image/p6.jpg",
+        "category_id": 2
+    },
     {
         "id": 7,
         "name": "Asus TUF",
         "price": 3000000,
         "description": "24inches, FHD, 99%sRGB, IPS, 180HZ",
-        "image": "image/p7.jpg"},
+        "image": "image/p7.jpg",
+        "category_id": 4
+    },
     {
         "id": 8,
         "name": "Samsung Odyssey",
         "price": 6000000,
         "description": "27inches, 2K, IPS, 180HZ",
-        "image": "image/p8.jpg"},
+        "image": "image/p8.jpg",
+        "category_id": 4
+
+    },
     {
         "id": 9,
         "name": "Iphone 7 Plus",
         "price": 5000000.0,
         "description": "Apple, RAM: 4GB,  256GB, iOS15",
-        "image": "image/p9.jpg"},
+        "image": "image/p9.jpg",
+        "category_id": 1
+    },
     {
         "id": 10,
         "name": "Iphone XS Max",
         "price": 10000000.0,
         "description": "Apple, RAM: 4GB,  256GB, iOS16",
-        "image": "image/p10.jpg"},
+        "image": "image/p10.jpg",
+        "category_id": 1
+    },
     {
         "id": 11,
         "name": "iPad Air M1",
         "price": 15000000.0,
         "description": "Apple, RAM: 8GB,  512GB, ipadOS16",
-        "image": "image/p11.jpg"},
+        "image": "image/p11.jpg",
+        "category_id": 3
+    },
     {
         "id": 13,
         "name": "MSI GF63 Thin",
         "price": 15000000.0,
         "description": "MSI,I5-12450H, RAM: 8GB, SSD, 512GB , RTX2050",
-        "image": "image/13.jpg"},
+        "image": "image/13.jpg",
+        "category_id": 2
+
+    },
     {
         "id": 14,
         "name": "Legion 7",
         "price": 60000000.0,
         "description": "Lenovo, i9-14900HX, RAM: 32GB, SSD: 512GB, RTX4070",
-        "image": "image/14.jpg"},
+        "image": "image/14.jpg",
+        "category_id": 2
+    },
     {
         "id": 15,
         "name": "Legion 7",
         "price": 60000000.0,
         "description": "Lenovo, i9-14900HX, RAM: 32GB, SSD: 512GB, RTX4070",
-        "image": "image/15.jpg"}
+        "image": "image/15.jpg",
+        "category_id": 2
+    }
 ]
