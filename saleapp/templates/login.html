@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+    div {
+        flex: 1;
+    }
+</style>
+<body>
+<header>
+    <nav>
+        <h1>Đăng nhập</h1>
+        <a href="/" >Trang chủ</a>    
+    </nav>
+</header>    
+    <div class="login">
+        <!-- Hiển thị thông báo lỗi/thành công -->
+        <form method="POST" class="login-border">
+            <div class="text">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <label>Account:&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" name="username" required class="input" placeholder="Input your account"><br><br>
+            
+            <label>Password: </label>
+            <input type="password" name="password" required class="input" placeholder="Input your password"><br><br>
+            
+            <button type="submit" class="submit">Đăng nhập</button>
+            <p>Chưa có tài khoản?&nbsp;&nbsp;<a href="/" class="signin">Đăng kí</a> </p>
+        </form>
+    </div>
+</body>
+<footer>
+        <p>&copy; 2024 SA-LE</p>
+</footer>
+</html>
