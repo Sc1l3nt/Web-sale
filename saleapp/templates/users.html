@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách người dùng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+        table {
+            width: 800px;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background: linear-gradient( #f27121, #e94057,#8a2387);
+        }
+    </style>
+</head>
+<body>
+    <h1>Danh sách người dùng đã đăng ký</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tên đăng nhập</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

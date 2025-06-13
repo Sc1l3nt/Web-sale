@@ -108,7 +108,7 @@ a {
 login p {
     color: #e94057;
 }
-.input {
+.input, .account {
     padding: 10px 14px;
     font-size: 15px;
     border: 2px solid #ccc;
@@ -122,15 +122,18 @@ login p {
 .submit {
     padding: 5px;
     font-size: 15px;
-    background: linear-gradient(#8a2387, #e94057, #f27121);
-    color: white;
+    background-color: #fdf6f0;
+    color: black;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     width: 200px;
 }
+.submit button:hover {
+    background-color: #989898;
+}
 a {    
-    font-weight: bolder;
+    /* font-weight: bolder; */
     border: 2px;
     border: none;
     border-radius: 10px;
@@ -152,5 +155,5 @@ a {
 .text {
     color: #e94057;
     text-align: justify;
-    font-weight: bolder;
+    /* font-weight: bolder; */
 }

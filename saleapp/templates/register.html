@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+  main {
+    flex: 1;
+  }
+
+  .login {
+    max-width: 400px;
+    margin: 50px auto;
+  }
+
+  .login-border {
+    width: 400px;
+    border: 1px solid #ccc;
+    padding: 30px;
+    border-radius: 8px;
+  }
+
+  .login-border div {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input.input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .fa-eye, .fa-eye-slash {
+    position: absolute;
+    right: 10px;
+    top: 38px;
+    cursor: pointer;
+    color: #888;
+  }
+
+  .submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+
+  .signin {
+    color: white;
+    text-decoration: none;
+  }
+
+  .signin:hover {
+    text-decoration: none;
+  }
+
+  .text .error {
+    color: red;
+  }
+
+  .text .success {
+    color: green;
+  }
+</style>
+<body>
+  <header>
+    <nav>
+        <h1>Đăng ký</h1>
+        <a href="/" >Trang chủ</a>    
+    </nav>
+  </header> 
+  <main>
+    <div style="padding-top: 80px;"> {% with messages = get_flashed_messages() %}
+      
+      <div class="login"> <div class="login-border"> <form method="post">
+        {% if messages %}
+          <ul>
+            {% for message in messages %}
+              <li style="color: red">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+        <div class="form-group"> <label>Account:&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" name="username" required class="input">
+        </div>
+        
+        <div class="form-group"> <label>Password:</label>
+            <input type="password" name="password" required class="input"><i class="fa fa-eye" aria-hidden="true" id="togglePassword"></i><br><br>
+        </div>
+        
+        <button type="submit" class="submit">Đăng ký</button> </form>
+        <p>Đã có tài khoản? <a href="{{ url_for('login') }}" class="signin">Đăng nhập</a></p>
+        </div>
+      </div>
+    </main> 
+  </body>
+  <footer>
+    <p>&copy; 2024 SA-LE</p>
+  </footer>
+<script>
+    window.onload = function () {
+        const passwordInput = document.querySelector('input[name="password"]');
+        const toggleIcon = document.getElementById('togglePassword');
+
+        toggleIcon.addEventListener('click', function () {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    };
+</script>
+</html>

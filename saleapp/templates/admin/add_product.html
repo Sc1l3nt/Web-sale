@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Them moi san pham</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Them san pham moi</h1>
+    <form class="custom" method="POST" action="{{ url_for('admin_add_product') }}" enctype="multipart/form-data">
+        <div>
+            <label>ID san pham: </label>
+            <input class="input1" type="number" name="product_id" value="{{ product_id }}" style="width: 80px" readonly><br>
+        </div>
+
+        <div>
+            <label for="name">Ten cua san pham: </label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div>
+            <label for="discription">Mo ta: </label>
+            <input type="text" placeholder="Ten nsx, Ram, SSD, Chip..." id="discription" name="discription" required>
+        </div>
+
+        <div>
+            <label for="price">Gia tien: </label>
+            <input type="text" id="price" name="price" required>
+        </div>
+
+        <div>
+            <label for="category_id">Phan loai san pham: </label>
+            <select id="category_id" name="category_id" required>
+                {% for cate in categories %}
+                <option value="{{ cate['id'] }}">{{ cate['name'] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="image">Them anh san pham ( voi ten file: p{id san pham}.jpg):</label>
+            <input type="file" id="image" name="image"  accept="image/*"><br>
+        </div>
+        <div >
+            <button type="submit">Them</button>
+        </div>
+    </form>
+
+</body>
+</html>
