@@ -1,55 +1,47 @@
-{% extends "manage_users.html" %}
+{% extends 'base.html' %} {# Assuming you have a base.html for layout #}
+
+{% block title %}Manage Users{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold text-gray-800 mb-6">Quản lý người dùng</h1>
+<div class="container mt-5">
+    <h1>Manage Users</h1>
 
-<div class="bg-white p-6 rounded-lg shadow-lg">
-    <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tên đăng nhập</th> {# Đã sửa từ Email #}
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vai trò</th>
-                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Hành động</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                {% for user in users %}
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ user.id }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ user.username }}</td> {# Đã sửa từ user.email #}
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                            {% if user.role == 'admin' %}bg-red-100 text-red-800{% else %}bg-green-100 text-green-800{% endif %}">
-                            {{ user.role }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        {% if user.role != 'admin' and user.id != session.get('user_id') %} {# Ngăn không cho xóa admin và chính tài khoản đang đăng nhập #}
-                        <form action="{{ url_for('admin_delete_user', user_id=user.id) }}" method="POST" class="inline-block" onsubmit="return confirm('Bạn có chắc chắn muốn xóa người dùng {{ user.username }} không?');">
-                            <button type="submit" class="text-red-600 hover:text-red-900">Xóa</button>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Users</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    {% if user.role != 'admin' and user.id != session.get('user_id') %}
+                        <form action="{{ url_for('admin_delete_user', user_id=user.id) }}" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
-                        {% else %}
-                        <span class="text-gray-400">Không thể xóa</span>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% else %} {# Nếu không có user nào #}
-                <tr>
-                    <td colspan="4" class="px-6 py-4 text-center text-gray-500">
-                        Chưa có người dùng nào được đăng ký.
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    <div class="mt-6 text-right">
-        <a href="{{ url_for('admin_control') }}" class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition duration-200 shadow-sm">
-            <i class="fas fa-arrow-left mr-2"></i> Quay lại bảng điều khiển
-        </a>
-    </div>
+                    {% else %}
+                        <button class="btn btn-secondary btn-sm" disabled>NO</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('admin_control') }}" class="btn btn-secondary mt-3">Return Admin</a>
 </div>
 {% endblock %}

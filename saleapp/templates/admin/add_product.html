@@ -1,50 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Them moi san pham</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <h1>Them san pham moi</h1>
-    <form class="custom" method="POST" action="{{ url_for('admin_add_product') }}" enctype="multipart/form-data">
-        <div>
-            <label>ID san pham: </label>
-            <input class="input1" type="number" name="product_id" value="{{ product_id }}" style="width: 80px" readonly><br>
+{% extends 'base.html' %} {# Kế thừa từ base.html #}
+
+{% block title %}Thêm Sản phẩm mới{% endblock %} {# Đặt tiêu đề cho trang #}
+
+{% block content %} {# Bắt đầu khối nội dung chính #}
+<div class="container mt-5" >
+    <h1 class="mb-4">Thêm sản phẩm mới</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form class="needs-validation" method="POST" action="{{ url_for('admin_add_product') }}" enctype="multipart/form-data" novalidate>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+            <div class="invalid-feedback">
+                Vui lòng nhập tên sản phẩm.
+            </div>
         </div>
 
-        <div>
-            <label for="name">Ten cua san pham: </label>
-            <input type="text" id="name" name="name" required>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Tên NSX, Ram, SSD, Chip..."></textarea>
         </div>
 
-        <div>
-            <label for="discription">Mo ta: </label>
-            <input type="text" placeholder="Ten nsx, Ram, SSD, Chip..." id="discription" name="discription" required>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price:</label>
+            <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+            <div class="invalid-feedback">
+                Vui lòng nhập giá tiền.
+            </div>
         </div>
 
-        <div>
-            <label for="price">Gia tien: </label>
-            <input type="text" id="price" name="price" required>
-        </div>
-
-        <div>
-            <label for="category_id">Phan loai san pham: </label>
-            <select id="category_id" name="category_id" required>
+        <div class="mb-3">
+            <label for="category_id" class="form-label">Category:</label>
+            <select class="form-select" id="category_id" name="category_id" required>
                 {% for cate in categories %}
-                <option value="{{ cate['id'] }}">{{ cate['name'] }}</option>
+                    <option value="{{ cate['id'] }}">{{ cate['name'] }}</option>
                 {% endfor %}
             </select>
+            <div class="invalid-feedback">
+                Vui lòng chọn một danh mục.
+            </div>
         </div>
 
-        <div>
-            <label for="image">Them anh san pham ( voi ten file: p{id san pham}.jpg):</label>
-            <input type="file" id="image" name="image"  accept="image/*"><br>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image :</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            <div class="form-text">
+                Only accepts PNG, JPG, JPEG, GIF formats. The file name will be automatically generated based on the product ID (for example: p1.jpg).
+            </div>
         </div>
-        <div >
-            <button type="submit">Them</button>
-        </div>
+        
+        <button type="submit" class="btn btn-primary">ADD</button>
+        <a href="{{ url_for('admin_control') }}" class="btn btn-secondary">Return Admin page</a>
     </form>
+</div>
 
-</body>
-</html>
+{% endblock %} {# Kết thúc khối nội dung chính #}
+
+{% block scripts_extra %}
+<script>
+// JavaScript for Bootstrap form validation
+(function () {
+  'use strict'
+
+  var forms = document.querySelectorAll('.needs-validation')
+
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
+{% endblock %}

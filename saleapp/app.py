@@ -51,25 +51,7 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-# --- Product and Category Models (if you want to switch from JSON to DB for products) ---
-# For now, products/categories are still loaded from JSON as per original code.
-# If you decide to manage products in DB, uncomment and use these:
-# class Category(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100), nullable=False)
-#     products = db.relationship('Product', backref='category', lazy=True)
-#
-# class Product(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100), nullable=False)
-#     price = db.Column(db.Float, nullable=False)
-#     description = db.Column(db.Text)
-#     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
 
-
-# --- Database Initialization ---
-# This part should ideally run once, e.g., using a separate script or on first app run.
-# Moved out of before_request to avoid running on every request.
 with app.app_context():
     db.create_all() # Creates tables for User (and Product/Category if defined and uncommented)
 
@@ -81,14 +63,6 @@ with app.app_context():
         db.session.commit()
         print("Admin user created (username: admin, password: admin_password)")
 
-    # You might also want to populate categories and products here if you switch them to DB
-    # Example for categories if you decide to use DB:
-    # if not Category.query.first():
-    #     db.session.add(Category(name='Electronics'))
-    #     db.session.add(Category(name='Books'))
-    #     db.session.commit()
-
-# --- JSON utilities (Still used for products and categories as per original code) ---
 def load_json_data(filename):
     filepath = os.path.join(DATA_DIR, filename)
     try:
@@ -287,7 +261,7 @@ def register():
 # Check users (now from SQLAlchemy DB)
 @app.route('/users')
 def list_user():
-    users = User.query.order_by(User.id.asc()).all() # Query from SQLAlchemy User model
+    users = User.query.order_by(User.id.asc()).all() 
     return render_template('users.html', users=users)
 
 @app.route('/login', methods=['GET','POST'])
@@ -374,7 +348,7 @@ def admin_add_product():
             "price": price,
             "description": description,
             "category_id": category_id,
-            "image": url_for('static', filename=f'images/products/{image_filename}') if image_filename else None # Lưu đường dẫn ảnh tĩnh
+            "image": url_for('static', filename=f'image/{new_id}.jpg') if image_filename else None # Lưu đường dẫn ảnh tĩnh
         }
         # Nếu không có ảnh hoặc lỗi ảnh, "image" có thể là None hoặc một placeholder URL khác
 
@@ -412,8 +386,6 @@ def admin_edit_product(product_id):
         product_to_edit['price'] = float(request.form['price'])
         product_to_edit['description'] = request.form['description']
         product_to_edit['category_id'] = int(request.form['category_id'])
-        # Optionally update image if form provides one
-        # product_to_edit['image'] = request.form.get('image', product_to_edit['image'])
 
         save_products(current_products)
         flash('Sản phẩm đã được cập nhật!', 'success')
@@ -437,7 +409,7 @@ def admin_delete_product(product_id):
     return redirect(url_for('admin_manage_products'))
 
 
-@app.route('/admin/manage-users') # New route for user management
+@app.route('/admin/manage-users') 
 @admin_required
 def admin_manage_users():
     users = User.query.order_by(User.id.asc()).all() # Query from SQLAlchemy User model

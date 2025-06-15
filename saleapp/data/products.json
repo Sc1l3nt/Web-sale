@@ -62,7 +62,6 @@
         "description": "27inches, 2K, IPS, 180HZ",
         "image": "image/p8.jpg",
         "category_id": 4
-
     },
     {
         "id": 9,
@@ -95,7 +94,6 @@
         "description": "MSI,I5-12450H, RAM: 8GB, SSD, 512GB , RTX2050",
         "image": "image/13.jpg",
         "category_id": 2
-
     },
     {
         "id": 14,
@@ -112,5 +110,13 @@
         "description": "Lenovo, i9-14900HX, RAM: 32GB, SSD: 512GB, RTX4070",
         "image": "image/15.jpg",
         "category_id": 2
+    },
+    {
+        "id": 16,
+        "name": "Oppo Find x8",
+        "price": 13000000.0,
+        "description": "Oppo, 1TB, Ram: 16GB, Display: 6.59 inches",
+        "category_id": 1,
+        "image": "/static/images/products/p16.png"
     }
 ]
