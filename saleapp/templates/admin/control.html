@@ -5,11 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<style>
+    header {
+        color: rgb(0, 0, 0);
+        padding: 10px;
+        text-align: center;
+    }
+    ul {
+        list-style: none;
+        padding-left: 130px;
+    }
+    .product, .users {
+        border: 5px solid aqua;
+        border-radius: 10px;
+        background-color: aqua;
+        text-decoration: none;
+        color: black;
+    }
+    li {
+        padding: 20px;
+    }
+</style>
+<header>
   <h2>Admin Dashboard</h2>
+</header>
+<body>
   <ul>
-    <li><a href="{{ url_for('admin_add_product') }}">➕ Thêm sản phẩm</a></li>
-    <li><a href="{{ url_for('admin_manage_users') }}">👤 Quản lý người dùng</a></li>
+    <li><a href="{{ url_for('admin_add_product') }}" class="product">➕ Thêm sản phẩm</a></li>
+    <li><a href="{{ url_for('admin_manage_users') }}" class="users">👤 Quản lý người dùng</a></li>
   </ul>
 </body>
 </html>
+
